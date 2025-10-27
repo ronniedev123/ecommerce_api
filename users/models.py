@@ -6,9 +6,9 @@ class User(AbstractUser):
         ('admin', 'Admin'),
         ('user', 'User'),
     )
-    role = models.CharField(max_length=10), choices=ROLE_CHOICES, default='user')
+    role = models.CharField(max_length=10, choices=ROLE_CHOICES, default='user')
 
     def __str__(self):
-        return self.username
+        return f"{self.username} ({self.role})"
 
 # Create your models here.
