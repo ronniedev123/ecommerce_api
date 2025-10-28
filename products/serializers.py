@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Category
+from .models import Product, Category
 
 class ProductSerializer(serializers.ModelSerializer):
     category_name = serializers.CharField(source='category.name', read_only=True)
@@ -22,11 +22,12 @@ class ProductSerializer(serializers.ModelSerializer):
     def validate_stock(self, value):
         if value < 0:
             raise serializers.ValidationError("Stock cannot be negative.")
-                                                                                                     return value
+        return value
 
-                                                                                                 def validate_name(self, value):
-                                                                                                     if not value.strip():
-            raise serializers.ValidationError("Product name cannot be empty.")                       return value
+    def validate_name(self, value):
+        if not value.strip():
+            raise serializers.ValidationError("Product name cannot be empty.")
+        return value
 
 
 class CategorySerializer(serializers.ModelSerializer):
